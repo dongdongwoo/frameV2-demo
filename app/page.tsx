@@ -9,7 +9,7 @@ const frameMetadata = {
     action: {
       type: "launch_frame",
       name: "My Frame App",
-      url: "https://271f-175-209-162-195.ngrok-free.app/",
+      url: "https://frame-v2-demo-tau.vercel.app/",
       splashImageUrl: "https://i.imgur.com/H8yDhgC.png",
       splashBackgroundColor: "#ffffff",
     },
