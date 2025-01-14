@@ -22,12 +22,12 @@ import {
 } from "wagmi";
 
 import { config } from "~/app/components/providers/WagmiProvider";
-import { Button } from "../components/ui/Button";
 import { truncateAddress } from "~/app/lib/truncateAddress";
 import { base, optimism } from "wagmi/chains";
 import { BaseError, UserRejectedRequestError } from "viem";
 import { createStore } from "mipd";
 import { Label } from "~/app/components/ui/label";
+import { Button } from "~/app/components/ui/Button";
 
 export default function Demo(
   { title }: { title?: string } = { title: "Frames v2 Demo" }
