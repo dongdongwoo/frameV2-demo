@@ -1,4 +1,4 @@
-import { ethers, verifyMessage } from "ethers";
+import { ethers } from "ethers";
 
 function toBase64URL(base64: string): string {
   return base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
@@ -41,7 +41,7 @@ export async function createFarcasterAccountAssociation() {
   // Compact 형식
   const compactJfs = `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 
-  const { fid, type, key } = JSON.parse(
+  const { type } = JSON.parse(
     Buffer.from(
       encodedHeader.replace(/-/g, "+").replace(/_/g, "/"),
       "base64"
