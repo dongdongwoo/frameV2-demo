@@ -1,4 +1,5 @@
-import ClientDemo from "./ClientDemo";
+import { Metadata } from "next";
+import App from "./app";
 
 const frameMetadata = {
   version: "next",
@@ -16,7 +17,7 @@ const frameMetadata = {
   },
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "My FrameV2 App",
   description: "A FrameV2 for Farcaster",
   openGraph: {
@@ -29,9 +30,5 @@ export const metadata = {
 };
 
 export default function Home() {
-  return (
-    <main className="min-h-screen flex flex-col p-4">
-      <ClientDemo />
-    </main>
-  );
+  return <App />;
 }

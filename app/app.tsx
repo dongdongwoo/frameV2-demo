@@ -6,6 +6,8 @@ const Demo = dynamic(() => import("~/app/components/Demo"), {
   ssr: false,
 });
 
-export default function ClientDemo() {
+export default function App(
+  { title }: { title?: string } = { title: "Frames v2 Demo" }
+) {
   return <Demo />;
 }

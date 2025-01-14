@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "A Farcaster Frames v2 demo app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
