@@ -1,32 +1,108 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGetCarouselList } from "~/app/hooks/useGetCarouselList";
-import sdk from "@farcaster/frame-sdk";
+import sdk, {
+  AddFrame,
+  Context,
+  FrameNotificationDetails,
+} from "@farcaster/frame-sdk";
+import { Buttons } from "./ui/Buttons";
 
 const Carousel = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [context, setContext] = useState<Context.FrameContext>();
+  const [added, setAdded] = useState(false);
+  const [lastEvent, setLastEvent] = useState("");
+  const [notificationDetails, setNotificationDetails] =
+    useState<FrameNotificationDetails | null>(null);
+  const [addFrameResult, setAddFrameResult] = useState("");
+  const [sendNotificationResult, setSendNotificationResult] = useState("");
+
   const { data: carouselData, isLoading, error } = useGetCarouselList();
 
+  const addFrame = useCallback(async () => {
+    try {
+      setNotificationDetails(null);
+      const result = await sdk.actions.addFrame();
+
+      if (result.notificationDetails) {
+        setNotificationDetails(result.notificationDetails);
+      }
+      setAddFrameResult(
+        result.notificationDetails
+          ? `Added, got notificaton token ${result.notificationDetails.token} and url ${result.notificationDetails.url}`
+          : "Added, got no notification details"
+      );
+    } catch (error) {
+      if (error instanceof AddFrame.RejectedByUser) {
+        setAddFrameResult(`Not added: ${error.message}`);
+      }
+
+      if (error instanceof AddFrame.InvalidDomainManifest) {
+        setAddFrameResult(`Not added: ${error.message}`);
+      }
+
+      setAddFrameResult(`Error: ${error}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    setNotificationDetails(context?.client.notificationDetails ?? null);
+  }, [context]);
   // Frame SDK 초기화
   useEffect(() => {
-    const initializeSDK = async () => {
-      if (!isSDKLoaded) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const context = await sdk.context;
-        setIsSDKLoaded(true);
+    const load = async () => {
+      const context = await sdk.context;
+      setContext(context);
+      setAdded(context.client.added);
 
-        // Frame이 준비되었음을 알림
-        sdk.actions.ready({});
-      }
+      sdk.on("frameAdded", ({ notificationDetails }) => {
+        setLastEvent(
+          `frameAdded${!!notificationDetails ? ", notifications enabled" : ""}`
+        );
+
+        setAdded(true);
+        if (notificationDetails) {
+          setNotificationDetails(notificationDetails);
+        }
+      });
+
+      sdk.on("frameAddRejected", ({ reason }) => {
+        setLastEvent(`frameAddRejected, reason ${reason}`);
+      });
+
+      sdk.on("frameRemoved", () => {
+        setLastEvent("frameRemoved");
+        setAdded(false);
+        setNotificationDetails(null);
+      });
+
+      sdk.on("notificationsEnabled", ({ notificationDetails }) => {
+        setLastEvent("notificationsEnabled");
+        setNotificationDetails(notificationDetails);
+      });
+      sdk.on("notificationsDisabled", () => {
+        setLastEvent("notificationsDisabled");
+        setNotificationDetails(null);
+      });
+
+      sdk.on("primaryButtonClicked", () => {
+        console.log("primaryButtonsClicked");
+      });
+
+      console.log("Calling ready");
+      sdk.actions.ready({});
     };
-
-    initializeSDK().catch(console.error);
-
-    return () => {
-      sdk.removeAllListeners();
-    };
+    if (sdk && !isSDKLoaded) {
+      console.log("Calling load");
+      setIsSDKLoaded(true);
+      load().catch(console.error);
+      return () => {
+        sdk.removeAllListeners();
+      };
+    }
   }, [isSDKLoaded]);
 
   if (isLoading) {
@@ -109,6 +185,19 @@ const Carousel = () => {
             Select a project below to participate in the ITO
           </p>
         </div>
+      </div>
+      <div className="mb-4">
+        <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg my-2">
+          <pre className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-">
+            sdk.actions.addFrame
+          </pre>
+        </div>
+        {addFrameResult && (
+          <div className="mb-2 text-sm">Add frame result: {addFrameResult}</div>
+        )}
+        <Buttons onClick={addFrame} disabled={added}>
+          Add frame to client
+        </Buttons>
       </div>
 
       {/* 칩 네비게이션 - 미니멀 모던 스타일 */}

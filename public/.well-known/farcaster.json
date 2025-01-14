@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjU0NDY3NywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDg0NjIyOGNjN2Q5NmRjNWJmZjE3YjA2ZGM0NWI5Yzc2ODNmNDQzNWIifQ",
-    "payload": "eyJkb21haW4iOiJodHRwczovL2ZyYW1lLXYyLWRlbW8tdGF1LnZlcmNlbC5hcHAifQ",
-    "signature": "MHg5MzUxMmNkNWE2Zjc3MDEwZWYxN2Q3MzQxYjY2YzlkNDIwYjhiYzdhNmNjZDdjOGU0NjM0YTk1NjZiMzE1MTA3MTIyMmMyZWQ5MWIwMmMyN2JjYTczMTFhYjk4N2M0ZmJmNjYzODMyOWE5ODViYzRlMTUxOTRjYzk1MjFmMmQzNjFi"
+    "header": "eyJmaWQiOjU0NDY3NywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDg0NjIyOENjN0Q5NkRjNUJGZjE3QjA2ZGM0NWI5Qzc2ODNGNDQzNWIifQ",
+    "payload": "eyJkb21haW4iOiJmcmFtZS12Mi1kZW1vLXRhdS52ZXJjZWwuYXBwIn0",
+    "signature": "MHg5M2ZmMWE2OWZlOGIwYzQzZDBjYzAzM2FhMDVhZGQzMDA3ZWJkYTNlOGJjMmVkMDAxNTJhZDM5ODMyNjQ3ZTljMDRkNDVmNWIxZGE1M2VlZGYzNmZkNDk4MTdhMzk0Mjc4ZmI0OGU4MjVlZjJlMzNkNjUyYTAzNTg3MDcxZjA5NjFj"
   },
   "frame": {
     "version": "1",
@@ -10,7 +10,7 @@
     "homeUrl": "https://frame-v2-demo-tau.vercel.app",
     "iconUrl": "https://i.imgur.com/mtBIx1h.png",
     "imageUrl": "https://i.imgur.com/H9bE7X3.png",
-    "buttonTitle": "Start App",
+    "buttonTitle": "Launch Frame",
     "splashImageUrl": "https://i.imgur.com/H8yDhgC.png",
     "splashBackgroundColor": "#ffffff",
     "webhookUrl": "https://your-domain.com/webhook"
