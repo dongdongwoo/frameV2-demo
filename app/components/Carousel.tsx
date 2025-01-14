@@ -1,9 +1,33 @@
-import { useState } from "react";
-import { useGetCarouselList } from "../hooks/useGetCarouselList";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useGetCarouselList } from "~/app/hooks/useGetCarouselList";
+import sdk from "@farcaster/frame-sdk";
 
 const Carousel = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const { data: carouselData, isLoading, error } = useGetCarouselList();
+
+  // Frame SDK 초기화
+  useEffect(() => {
+    const initializeSDK = async () => {
+      if (!isSDKLoaded) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const context = await sdk.context;
+        setIsSDKLoaded(true);
+
+        // Frame이 준비되었음을 알림
+        sdk.actions.ready({});
+      }
+    };
+
+    initializeSDK().catch(console.error);
+
+    return () => {
+      sdk.removeAllListeners();
+    };
+  }, [isSDKLoaded]);
 
   if (isLoading) {
     return (
