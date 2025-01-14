@@ -27,7 +27,7 @@ import { base, optimism } from "wagmi/chains";
 import { BaseError, UserRejectedRequestError } from "viem";
 import { createStore } from "mipd";
 import { Label } from "~/app/components/ui/label";
-import { Button } from "~/app/components/ui/Button";
+import { Buttons } from "@/app/components/ui/Buttons";
 
 export default function Demo(
   { title }: { title?: string } = { title: "Frames v2 Demo" }
@@ -123,7 +123,7 @@ export default function Demo(
       });
 
       sdk.on("primaryButtonClicked", () => {
-        console.log("primaryButtonClicked");
+        console.log("primaryButtonsClicked");
       });
 
       console.log("Calling ready");
@@ -314,7 +314,7 @@ export default function Demo(
                 sdk.actions.openUrl
               </pre>
             </div>
-            <Button onClick={openUrl}>Open Link</Button>
+            <Buttons onClick={openUrl}>Open Link</Buttons>
           </div>
 
           <div className="mb-4">
@@ -323,7 +323,7 @@ export default function Demo(
                 sdk.actions.openUrl
               </pre>
             </div>
-            <Button onClick={openWarpcastUrl}>Open Warpcast Link</Button>
+            <Buttons onClick={openWarpcastUrl}>Open Warpcast Link</Buttons>
           </div>
 
           <div className="mb-4">
@@ -341,7 +341,7 @@ export default function Demo(
                 sdk.actions.close
               </pre>
             </div>
-            <Button onClick={close}>Close Frame</Button>
+            <Buttons onClick={close}>Close Frame</Buttons>
           </div>
         </div>
 
@@ -377,9 +377,9 @@ export default function Demo(
                 Add frame result: {addFrameResult}
               </div>
             )}
-            <Button onClick={addFrame} disabled={added}>
+            <Buttons onClick={addFrame} disabled={added}>
               Add frame to client
-            </Button>
+            </Buttons>
           </div>
 
           {sendNotificationResult && (
@@ -388,9 +388,9 @@ export default function Demo(
             </div>
           )}
           <div className="mb-4">
-            <Button onClick={sendNotification} disabled={!notificationDetails}>
+            <Buttons onClick={sendNotification} disabled={!notificationDetails}>
               Send notification
-            </Button>
+            </Buttons>
           </div>
         </div>
 
@@ -410,7 +410,7 @@ export default function Demo(
           )}
 
           <div className="mb-4">
-            <Button
+            <Buttons
               onClick={() =>
                 isConnected
                   ? disconnect()
@@ -418,7 +418,7 @@ export default function Demo(
               }
             >
               {isConnected ? "Disconnect" : "Connect"}
-            </Button>
+            </Buttons>
           </div>
 
           <div className="mb-4">
@@ -431,13 +431,13 @@ export default function Demo(
                 <SendEth />
               </div>
               <div className="mb-4">
-                <Button
+                <Buttons
                   onClick={sendTx}
                   disabled={!isConnected || isSendTxPending}
                   isLoading={isSendTxPending}
                 >
                   Send Transaction (contract)
-                </Button>
+                </Buttons>
                 {isSendTxError && renderError(sendTxError)}
                 {txHash && (
                   <div className="mt-2 text-xs">
@@ -454,23 +454,23 @@ export default function Demo(
                 )}
               </div>
               <div className="mb-4">
-                <Button
+                <Buttons
                   onClick={signTyped}
                   disabled={!isConnected || isSignTypedPending}
                   isLoading={isSignTypedPending}
                 >
                   Sign Typed Data
-                </Button>
+                </Buttons>
                 {isSignTypedError && renderError(signTypedError)}
               </div>
               <div className="mb-4">
-                <Button
+                <Buttons
                   onClick={handleSwitchChain}
                   disabled={isSwitchChainPending}
                   isLoading={isSwitchChainPending}
                 >
                   Switch to {chainId === base.id ? "Optimism" : "Base"}
-                </Button>
+                </Buttons>
                 {isSwitchChainError && renderError(switchChainError)}
               </div>
             </>
@@ -505,13 +505,13 @@ function SignMessage() {
 
   return (
     <>
-      <Button
+      <Buttons
         onClick={handleSignMessage}
         disabled={isSignPending}
         isLoading={isSignPending}
       >
         Sign Message
-      </Button>
+      </Buttons>
       {isSignError && renderError(signError)}
       {signature && (
         <div className="mt-2 text-xs">
@@ -553,13 +553,13 @@ function SendEth() {
 
   return (
     <>
-      <Button
+      <Buttons
         onClick={handleSend}
         disabled={!isConnected || isSendTxPending}
         isLoading={isSendTxPending}
       >
         Send Transaction (eth)
-      </Button>
+      </Buttons>
       {isSendTxError && renderError(sendTxError)}
       {data && (
         <div className="mt-2 text-xs">
@@ -628,14 +628,14 @@ function SignIn() {
   return (
     <>
       {status !== "authenticated" && (
-        <Button onClick={handleSignIn} disabled={signingIn}>
+        <Buttons onClick={handleSignIn} disabled={signingIn}>
           Sign In with Farcaster
-        </Button>
+        </Buttons>
       )}
       {status === "authenticated" && (
-        <Button onClick={handleSignOut} disabled={signingOut}>
+        <Buttons onClick={handleSignOut} disabled={signingOut}>
           Sign out
-        </Button>
+        </Buttons>
       )}
 
       {signInFailure && !signingIn && (
@@ -680,13 +680,13 @@ function ViewProfile() {
           min="1"
         />
       </div>
-      <Button
+      <Buttons
         onClick={() => {
           sdk.actions.viewProfile({ fid: parseInt(fid) });
         }}
       >
         View Profile
-      </Button>
+      </Buttons>
     </>
   );
 }
