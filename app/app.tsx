@@ -9,5 +9,5 @@ const Demo = dynamic(() => import("~/app/components/Demo"), {
 export default function App(
   { title }: { title?: string } = { title: "Frames v2 Demo" }
 ) {
-  return <Demo />;
+  return <Demo title={title} />;
 }
