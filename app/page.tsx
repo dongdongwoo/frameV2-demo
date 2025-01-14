@@ -3,14 +3,13 @@ import App from "./app";
 
 const frameMetadata = {
   version: "next",
-  imageUrl: "https://i.imgur.com/H9bE7X3.png",
+  imageUrl: "https://i.imgur.com/q3bvlBj.png",
   button: {
-    title: "Start App",
+    title: "Launch Frame",
     action: {
       type: "launch_frame",
       name: "My Frame App",
-      url: "https://frame-v2-demo-tau.vercel.app/",
-      // url: "https://degenpad.app/",
+      url: "https://271f-175-209-162-195.ngrok-free.app/",
       splashImageUrl: "https://i.imgur.com/H8yDhgC.png",
       splashBackgroundColor: "#ffffff",
     },
