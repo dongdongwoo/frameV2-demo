@@ -14,11 +14,12 @@ const Carousel = () => {
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const [context, setContext] = useState<Context.FrameContext>();
   const [added, setAdded] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [lastEvent, setLastEvent] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [notificationDetails, setNotificationDetails] =
     useState<FrameNotificationDetails | null>(null);
   const [addFrameResult, setAddFrameResult] = useState("");
-  const [sendNotificationResult, setSendNotificationResult] = useState("");
 
   const { data: carouselData, isLoading, error } = useGetCarouselList();
 
