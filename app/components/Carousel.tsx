@@ -187,17 +187,23 @@ const Carousel = () => {
           </p>
         </div>
       </div>
-      <div className="mb-4">
-        <div className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg my-2">
+      <div className="mb-4 max-w-xs mx-auto">
+        <div className="p-2 bg-gray-100 rounded-lg my-2">
           <pre className="font-mono text-xs whitespace-pre-wrap break-words max-w-[260px] overflow-x-">
             sdk.actions.addFrame
           </pre>
         </div>
         {addFrameResult && (
-          <div className="mb-2 text-sm">Add frame result: {addFrameResult}</div>
+          <div className="mb-2 text-sm text-center">
+            Add Frame result: {addFrameResult}
+          </div>
         )}
-        <Buttons onClick={addFrame} disabled={added}>
-          Add frame to client
+        <Buttons
+          onClick={addFrame}
+          disabled={added}
+          className="w-full bg-gray-900 text-white text-sm py-3 rounded-lg hover:bg-gray-800"
+        >
+          Add Frame to Client warpcast
         </Buttons>
       </div>
 
