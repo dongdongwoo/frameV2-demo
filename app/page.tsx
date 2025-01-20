@@ -3,7 +3,7 @@ import App from "./app";
 
 const frameMetadata = {
   version: "next",
-  imageUrl: "https://i.imgur.com/q3bvlBj.png",
+  imageUrl: "https://i.imgur.com/iIV7rGs.jpeg",
   button: {
     title: "Launch Frame",
     action: {
